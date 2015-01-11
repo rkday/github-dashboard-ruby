@@ -66,6 +66,7 @@ class IssueServer
     Thread.new do
       loop do
         sleep 300
+        read_config
         get_data
       end
     end
