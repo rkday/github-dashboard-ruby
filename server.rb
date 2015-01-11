@@ -109,8 +109,11 @@ end
 
 server = IssueServer.new
 server.read_config
+puts "Waiting to retrieve data from Github"
 server.get_data
 server.start_data_retrieval_thread
+
+set :port, 3005
 
 get '/issues' do
   content_type :json
@@ -126,6 +129,11 @@ get '/recentlyClosed' do
   content_type :json
   server.recently_closed_issues.to_json
 end
+
+get '/dashboard' do
+  redirect to('/dashboard.html')
+end
+
 
 get "/coffee/*.js" do
   filename = params[:splat].first
